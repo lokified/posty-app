@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { EyeOffOutline, EyeOutline } from "mdi-material-ui";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { clearState, signupUser, userSelector } from "./store/store";
@@ -37,6 +37,8 @@ const Register = (props) => {
   } = useForm();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   const { isFetching, isSuccess, isError, errorMessage } =
     useSelector(userSelector);
@@ -53,6 +55,7 @@ const Register = (props) => {
 
   useEffect(() => {
     if (isSuccess) {
+      navigate("/")
       dispatch(clearState());
     }
 
